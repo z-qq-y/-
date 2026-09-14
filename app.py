@@ -296,12 +296,18 @@ def classification_page(doc: dict) -> None:
         for index in pending
     }
     if pending:
+        batch_key = f"batch-{doc['id']}"
+        if batch_key not in st.session_state:
+            st.session_state[batch_key] = pending
+        else:
+            st.session_state[batch_key] = [
+                index for index in st.session_state[batch_key] if index in pending
+            ]
         selected = st.multiselect(
             "选择同时分类的体系",
             pending,
-            default=pending,
             format_func=lambda index: labels[index],
-            key=f"batch-{doc['id']}",
+            key=batch_key,
         )
         workers = st.number_input("最大并发数", 1, 8, min(4, len(pending)), key=f"workers-{doc['id']}")
         demo_column, api_column = st.columns(2)
@@ -452,6 +458,9 @@ def common_page() -> None:
 
 def documents_page() -> None:
     st.header("文献管理")
+    if not st.session_state.docs:
+        st.info("当前会话没有文献。可从侧栏导入 YAML 或恢复内置示例。")
+        return
     rows = []
     for doc in st.session_state.docs.values():
         rows.append(
@@ -479,14 +488,24 @@ def documents_page() -> None:
         st.rerun()
 
 
-def structures_page(doc: dict | None) -> None:
+def structures_page() -> None:
     st.header("化学结构库")
-    if not doc or not doc["structures"]:
+    merged: dict[str, dict] = {}
+    for doc in st.session_state.docs.values():
+        for canonical, row in doc["structures"].items():
+            target = merged.setdefault(
+                canonical,
+                {"smiles": row["smiles"], "sources": []},
+            )
+            target["sources"].extend(
+                f"{doc['title']}: {source}" for source in row["sources"]
+            )
+    if not merged:
         st.info("完成材料审核后，这里会按 Canonical SMILES 展示会话内去重结构。")
         return
     rows = [
         {"Canonical SMILES": canonical, "原始 SMILES": row["smiles"], "材料来源": "、".join(row["sources"])}
-        for canonical, row in doc["structures"].items()
+        for canonical, row in merged.items()
     ]
     st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
 
@@ -555,7 +574,7 @@ if page == "文献管理":
 elif page == "常用结构":
     common_page()
 elif page == "化学结构库":
-    structures_page(current_doc)
+    structures_page()
 elif page == "使用说明":
     help_page()
 elif not current_doc:
