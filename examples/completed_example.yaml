@@ -1,0 +1,331 @@
+paper_title: "A P/N/S-containing compound toward enhanced fire safety epoxy resin with well-balanced performance"
+paper doi: "10.1016/j.polymdegradstab.2021.109698"
+abstract: "In order to obtain an efficient flame retardant without sacrificing mechanical properties and transparency of epoxy resin (EP), a P/N/S-containing flame retardant (STP) by combining 9,10-dihydro-9-oxa-10-phosphaphenanthrene-10-oxide (DOPO) with Schiff base intermediate synthesized by the reaction of sulfathiazole and 2-thenaldehyde was successfully synthesized. The synthesis of STP was verified and the properties of modified EP were studied. The test results indicated that STP slowed down the degradation rate of EP. The glass transition temperature ($T_g$) of the flame-retardant epoxy resin (FREP) samples were well maintained and even improved after introducing a certain amount of STP. Furthermore, FREP with low phosphorus content exerted excellent flame retardant ability, EP/5%STP (phosphorus content: 0.27 wt%) obtained the V-0 rating of UL-94 test with the value of limiting oxygen index (LOI) 33.5%. In contrast with EP, the peak heat release rate (PHRR), total heat release (THR) and total smoke production (TSP) of EP/7.5%STP were respectively decreased by 33.31%, 26.04% and 28.75%. Mechanical performance tests show that STP improved the tensile and flexural strength of EP. It is worth mentioning that the EP modified with STP still maintains good transparency."
+epoxy_resin_systems:
+  - full_name: "Diglycidyl ether of bisphenol A epoxy resin (DGEBA, E-51) cured with 4,4'-diaminodiphenyl methane (DDM)"
+    abbreviation: "EP"
+    epoxy_resin:
+      - full_name: "diglycidyl ether of bisphenol A"
+        abbreviation: "DGEBA"
+        SMILES: "CC(C)(c1ccc(OCC2CO2)cc1)c1ccc(OCC2CO2)cc1"
+    curing_agents:
+      - full_name: "4,4'-diaminodiphenyl methane"
+        abbreviation: "DDM"
+        SMILES: "Nc1ccc(Cc2ccc(N)cc2)cc1"
+    dynamic_bond_types:
+      full_name: "none"
+      resource: "none"
+    formulation_and_curing:
+      formulation:
+        components and ratio:
+          - component_type: "epoxy resin"
+            abbreviation: "DGEBA"
+            value: 100
+            unit: "phr"
+          - component_type: "curing agent"
+            abbreviation: "DDM"
+            value: 25
+            unit: "phr"
+      curing_protocol:
+        - stage: "other"
+          temperature: "160°C"
+          time: "until uniform"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "other"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "degass"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "vacuum"
+          atmosphere: "other"
+        - stage: "pre-cure"
+          temperature: "120°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "150°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "180°C"
+          time: "3 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+    mechanical_properties:
+      tensile_test:
+        test_standard: "ASTM D638"
+        tensile_strength:
+          value: 63
+          unit: "MPa"
+          std_dev: 6
+    thermal_properties:
+      glass_transition_temperature:
+        value: 152
+        unit: "°C"
+      onset_degradation_temperature:
+        value: 370.9
+        unit: "°C"
+        atmosphere: "nitrogen"
+      temperature_at_max_rate:
+        value: 388.1
+        unit: "°C"
+
+    classification: conventional_epoxy
+  - full_name: "Diglycidyl ether of bisphenol A epoxy resin (DGEBA, E-51) cured with 4,4'-diaminodiphenyl methane (DDM) and modified with 2.5 wt% STP"
+    abbreviation: "EP/2.5%STP"
+    epoxy_resin:
+      - full_name: "diglycidyl ether of bisphenol A"
+        abbreviation: "DGEBA"
+        SMILES: "CC(C)(c1ccc(OCC2CO2)cc1)c1ccc(OCC2CO2)cc1"
+    curing_agents:
+      - full_name: "4,4'-diaminodiphenyl methane"
+        abbreviation: "DDM"
+        SMILES: "Nc1ccc(Cc2ccc(N)cc2)cc1"
+    dynamic_bond_types:
+      full_name: "none"
+      resource: "none"
+    additives:
+      - role: "fire retardant"
+        full_name: "P/N/S-containing flame retardant synthesized from sulfathiazole, 2-thenaldehyde and DOPO (STP)"
+        abbreviation: "STP"
+        SMILES: "C1=CC2=C(C=C1)OP(=O)(C3=C2C=CC=C3)C(C4=CC=CS4)NC5=CC=C(C=C5)S(=O)(=O)NC6=NC=CS6"
+    formulation_and_curing:
+      formulation:
+        components and ratio:
+          - component_type: "epoxy resin"
+            abbreviation: "DGEBA"
+            value: 100
+            unit: "phr"
+          - component_type: "curing agent"
+            abbreviation: "DDM"
+            value: 25
+            unit: "phr"
+          - component_type: "additive"
+            abbreviation: "STP"
+            value: 3.21
+            unit: "phr"
+      curing_protocol:
+        - stage: "other"
+          temperature: "160°C"
+          time: "until uniform"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "other"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "degass"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "vacuum"
+          atmosphere: "other"
+        - stage: "pre-cure"
+          temperature: "120°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "150°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "180°C"
+          time: "3 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+    mechanical_properties:
+      tensile_test:
+        test_standard: "ASTM D638"
+        tensile_strength:
+          value: 76
+          unit: "MPa"
+          std_dev: 3
+    thermal_properties:
+      glass_transition_temperature:
+        value: 167
+        unit: "°C"
+      onset_degradation_temperature:
+        value: 354.9
+        unit: "°C"
+        atmosphere: "nitrogen"
+      temperature_at_max_rate:
+        value: 383.6
+        unit: "°C"
+
+    classification: conventional_epoxy
+  - full_name: "Diglycidyl ether of bisphenol A epoxy resin (DGEBA, E-51) cured with 4,4'-diaminodiphenyl methane (DDM) and modified with 5 wt% STP"
+    abbreviation: "EP/5%STP"
+    epoxy_resin:
+      - full_name: "diglycidyl ether of bisphenol A"
+        abbreviation: "DGEBA"
+        SMILES: "CC(C)(c1ccc(OCC2CO2)cc1)c1ccc(OCC2CO2)cc1"
+    curing_agents:
+      - full_name: "4,4'-diaminodiphenyl methane"
+        abbreviation: "DDM"
+        SMILES: "Nc1ccc(Cc2ccc(N)cc2)cc1"
+    dynamic_bond_types:
+      full_name: "none"
+      resource: "none"
+    additives:
+      - role: "fire retardant"
+        full_name: "P/N/S-containing flame retardant synthesized from sulfathiazole, 2-thenaldehyde and DOPO (STP)"
+        abbreviation: "STP"
+        SMILES: "C1=CC2=C(C=C1)OP(=O)(C3=C2C=CC=C3)C(C4=CC=CS4)NC5=CC=C(C=C5)S(=O)(=O)NC6=NC=CS6"
+    formulation_and_curing:
+      formulation:
+        components and ratio:
+          - component_type: "epoxy resin"
+            abbreviation: "DGEBA"
+            value: 100
+            unit: "phr"
+          - component_type: "curing agent"
+            abbreviation: "DDM"
+            value: 25
+            unit: "phr"
+          - component_type: "additive"
+            abbreviation: "STP"
+            value: 6.58
+            unit: "phr"
+      curing_protocol:
+        - stage: "other"
+          temperature: "160°C"
+          time: "until uniform"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "other"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "degass"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "vacuum"
+          atmosphere: "other"
+        - stage: "pre-cure"
+          temperature: "120°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "150°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "180°C"
+          time: "3 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+    mechanical_properties:
+      tensile_test:
+        test_standard: "ASTM D638"
+        tensile_strength:
+          value: 82
+          unit: "MPa"
+          std_dev: 4
+    thermal_properties:
+      glass_transition_temperature:
+        value: 159
+        unit: "°C"
+      onset_degradation_temperature:
+        value: 341.0
+        unit: "°C"
+        atmosphere: "nitrogen"
+      temperature_at_max_rate:
+        value: 379.2
+        unit: "°C"
+
+    classification: conventional_epoxy
+  - full_name: "Diglycidyl ether of bisphenol A epoxy resin (DGEBA, E-51) cured with 4,4'-diaminodiphenyl methane (DDM) and modified with 7.5 wt% STP"
+    abbreviation: "EP/7.5%STP"
+    epoxy_resin:
+      - full_name: "diglycidyl ether of bisphenol A"
+        abbreviation: "DGEBA"
+        SMILES: "CC(C)(c1ccc(OCC2CO2)cc1)c1ccc(OCC2CO2)cc1"
+    curing_agents:
+      - full_name: "4,4'-diaminodiphenyl methane"
+        abbreviation: "DDM"
+        SMILES: "Nc1ccc(Cc2ccc(N)cc2)cc1"
+    dynamic_bond_types:
+      full_name: "none"
+      resource: "none"
+    additives:
+      - role: "fire retardant"
+        full_name: "P/N/S-containing flame retardant synthesized from sulfathiazole, 2-thenaldehyde and DOPO (STP)"
+        abbreviation: "STP"
+        SMILES: "C1=CC2=C(C=C1)OP(=O)(C3=C2C=CC=C3)C(C4=CC=CS4)NC5=CC=C(C=C5)S(=O)(=O)NC6=NC=CS6"
+    formulation_and_curing:
+      formulation:
+        components and ratio:
+          - component_type: "epoxy resin"
+            abbreviation: "DGEBA"
+            value: 100
+            unit: "phr"
+          - component_type: "curing agent"
+            abbreviation: "DDM"
+            value: 25
+            unit: "phr"
+          - component_type: "additive"
+            abbreviation: "STP"
+            value: 10.14
+            unit: "phr"
+      curing_protocol:
+        - stage: "other"
+          temperature: "160°C"
+          time: "until uniform"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "other"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "degass"
+          temperature: "90°C"
+          time: "5 min"
+          pressure: "vacuum"
+          atmosphere: "other"
+        - stage: "pre-cure"
+          temperature: "120°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "150°C"
+          time: "2 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+        - stage: "post-cure"
+          temperature: "180°C"
+          time: "3 h"
+          pressure: "atmospheric"
+          atmosphere: "air"
+    mechanical_properties:
+      tensile_test:
+        test_standard: "ASTM D638"
+        tensile_strength:
+          value: 79
+          unit: "MPa"
+          std_dev: 3
+    thermal_properties:
+      glass_transition_temperature:
+        value: 149
+        unit: "°C"
+      onset_degradation_temperature:
+        value: 329.2
+        unit: "°C"
+        atmosphere: "nitrogen"
+      temperature_at_max_rate:
+        value: 372.9
+        unit: "°C"
+    classification: conventional_epoxy
+

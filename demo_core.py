@@ -123,10 +123,27 @@ def validate_smiles(smiles: str) -> dict[str, Any]:
 
 
 SYSTEM_PROMPT = """你负责对单个环氧树脂体系进行严格二分类。
-只返回 JSON。classification 只能是 conventional_epoxy 或 degradable_epoxy。
-若为 degradable_epoxy，填写 dynamic_bond_full_name 和 dynamic_bond_resource。
-若证据不足，requires_human_review 必须为 true。不要仅凭 SMILES 中的官能团判断。
-JSON 字段必须包含 classification、confidence、requires_human_review、reasoning_summary、dynamic_bond_full_name、dynamic_bond_resource。
+判断对象与边界：
+1. 只判断输入中 epoxy_resin_system 所代表的当前体系，不要用整篇论文的总体主题替代当前体系判断。
+2. 一篇讨论可降解材料的论文也可能包含普通环氧树脂对照组，必须逐体系判断。
+3. 只允许返回 conventional_epoxy 或 degradable_epoxy。conventional_epoxy 表示当前证据没有证明该体系可降解，不表示该材料在所有条件下绝对不可降解。
+
+证据规则：
+1. 优先依据摘要、当前体系组成和明确的实验描述中关于降解、解聚、回收或动态交换机制的证据。
+2. 若摘要与当前体系的组成或明确实验描述冲突，以当前体系的组成和明确实验描述为准。
+3. 不能仅因某个 SMILES 含有酯键等官能团，或名称中出现“生物基”“绿色”“可回收”等词语，就判为可降解。
+4. 输入 YAML 中原本存在的 dynamic_bond_types: 无、none、null、空字符串、not applicable 等内容均视为待补全占位值。它们既不是存在动态键的证据，也不是不存在动态键的证据，不得据此判断分类。
+5. 若证据不足，仍返回最可能的二分类，同时将 requires_human_review 设为 true，并在 reasoning_summary 中用中文说明缺少什么证据。
+
+动态键信息：
+1. 若为 degradable_epoxy，dynamic_bond_full_name 填当前体系中有明确依据的动态键中文全名；dynamic_bond_resource 填实际产生该动态键的当前体系材料类别和材料名称，例如“固化剂：XXX（ABC）”。resource 不是论文出处。
+2. 动态键必须能对应到当前体系中的具体材料；无法对应时 requires_human_review 必须为 true。
+3. 若为 conventional_epoxy，dynamic_bond_full_name 和 dynamic_bond_resource 必须为 null。
+
+输出语言：
+classification 字段保留规定的英文枚举值。reasoning_summary、dynamic_bond_full_name 和 dynamic_bond_resource 中的自然语言必须使用中文，不要返回英文说明。
+
+必须只返回一个 JSON 对象，不要使用 Markdown 代码块或添加 JSON 之外的文字。JSON 必须包含 classification、confidence、requires_human_review、reasoning_summary、dynamic_bond_full_name、dynamic_bond_resource 六个字段。
 """
 
 
@@ -135,12 +152,13 @@ def call_openai_compatible(
     model: str,
     api_key: str,
     payload: dict[str, Any],
+    system_prompt: str = SYSTEM_PROMPT,
 ) -> tuple[dict[str, Any], str]:
     client = OpenAI(api_key=api_key, base_url=base_url)
     response = client.chat.completions.create(
         model=model,
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system_prompt},
             {
                 "role": "user",
                 "content": json.dumps(payload, ensure_ascii=False, indent=2),
